@@ -3,7 +3,7 @@ public class Tile{
     private TileType tileType;
     private Item item = null;
     private Player player = null;
-    public final char symbol;
+    public char symbol;
     public Tile(TileType tileType){
         this.tileType = tileType;
         symbol = assignSymbol(tileType);
@@ -17,6 +17,11 @@ public class Tile{
 
     public TileType getTileType(){
         return tileType;
+    }
+
+    public void setTileType(TileType tileType){
+        this.tileType = tileType;
+        symbol = assignSymbol(tileType);
     }
 
     public boolean hasPlayer(){

@@ -25,7 +25,7 @@ public class Server {
         // Initiate conversation with client
         ServerProtocol sp = new ServerProtocol();
         outputLine = sp.processInput(null, null, null);
-        out.println(outputLine);
+        out.println(game.getBoard()+"\nEND");
 
         while ((inputLine = in.readLine()) != null) {
                 outputLine = sp.processInput(game, player1, inputLine);
@@ -36,5 +36,6 @@ public class Server {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
     }
 }
