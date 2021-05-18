@@ -9,9 +9,12 @@ public class ServerProtocol{
     public String processInput(Game game, Player player, String theInput) {
            String theOutput = null;
            if (state == WAITING) {
-                theOutput = game.getBoard()+"\nEND";
+                theOutput = "END";
                 state = ACTION;
             }else if (state == ACTION) {
+                if(theInput.equalsIgnoreCase("Bye.")){
+                    return "Bye.";
+                }
                 if (theInput.equalsIgnoreCase("W")) {
                     game.movePlayer(player, player.getX(), player.getY()-1);
                     theOutput = game.getBoard()+"\nEND";

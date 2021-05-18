@@ -61,7 +61,11 @@ public class Game {
     }
 
     public void movePlayer(Player player, int endX, int endY){
-        if (!board[endY][endX].hasPlayer() && (board[endY][endX].getTileType() == Tile.TileType.FLOOR || board[endY][endX].getTileType() == Tile.TileType.DOOR_OPEN)){
+        if (!board[endY][endX].hasPlayer() && (board[endY][endX].getTileType() == Tile.TileType.FLOOR || board[endY][endX].getTileType() == Tile.TileType.DOOR_OPEN || (board[endY][endX].getTileType() == Tile.TileType.DOOR_CLOSED && player.getItem() != null && player.getItem().itemType == Item.ItemType.KEY))){
+            if(board[endY][endX].getTileType() == Tile.TileType.DOOR_CLOSED){
+              player.setItem(null);
+              board[endY][endX].setTileType(Tile.TileType.DOOR_OPEN);
+            }
             board[endY][endX].setPlayer(player);
             board[player.getY()][player.getX()].setPlayer(null);
             player.setX(endX);
