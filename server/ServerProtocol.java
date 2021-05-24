@@ -9,7 +9,7 @@ public class ServerProtocol{
     public String processInput(Game game, Player player, String theInput) {
            String theOutput = null;
            if (state == WAITING) {
-                theOutput = game.getBoard()+"\nEND";
+                theOutput = "\nEND";
                 state = ACTION;
             }else if (state == ACTION) {
                 if (theInput.equalsIgnoreCase("W")) {
