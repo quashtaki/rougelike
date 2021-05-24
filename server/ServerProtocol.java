@@ -17,20 +17,20 @@ public class ServerProtocol{
                 }
                 if (theInput.equalsIgnoreCase("W")) {
                     game.movePlayer(player, player.getX(), player.getY()-1);
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase("A")) {
                     game.movePlayer(player, player.getX()-1, player.getY());
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase("S")) {
                     game.movePlayer(player, player.getX(), player.getY()+1);
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase("D")) {
                     game.movePlayer(player, player.getX()+1, player.getY());
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase(" ")) {
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else{
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }
        }
        return theOutput;

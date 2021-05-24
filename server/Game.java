@@ -76,6 +76,8 @@ public class Game {
                 player.setItem(board[endY][endX].getItem());
                 board[endY][endX].setItem(null);
             }
+        }else if(board[endY][endX].hasPlayer() && (player.getItem().itemType == Item.ItemType.SWORD)){
+            board[endY][endX].getPlayer().kill();
         }
     }
 
@@ -100,6 +102,10 @@ public class Game {
 
     public Player getPlayer1(){
         return player1;
+    }
+    
+    public Player getPlayer2(){
+        return player2;
     }
 
     public void printBoard(){
