@@ -5,7 +5,7 @@ public class Player{
     public char symbol;
     private int xPos;
     private int yPos;
-    private boolean alive = true;
+    public boolean alive = true;
     public Player(int xPos, int yPos, char symbol){
         this.xPos = xPos;
         this.yPos = yPos;

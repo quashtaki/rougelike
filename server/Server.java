@@ -8,15 +8,13 @@ import java.io.InputStreamReader;
 
 
 public class Server {
-    private Player player1, player2;
-    private int players = 0;
+    private Player[] players = new Player[9];
+    private int playerCount = 0;
     private int portNumber;
     private Game game;
     public Server(int portNumber){
         this.portNumber = portNumber;
         this.game = new Game();
-        player1 = game.getPlayer1();
-        player2 = game.getPlayer2();
     }
     public void listen(){
         try (ServerSocket serverSocket = new ServerSocket(portNumber)) { 
@@ -31,7 +29,9 @@ public class Server {
 
     // :)
     private Player getNextPlayer() {
-        if (players++ == 0) return player1;
-        else return player2;
+    	playerCount++;
+    	players[playerCount-1] = new Player(1+playerCount,20,Integer.toString(playerCount).charAt(0));
+    	game.addPlayer(players[playerCount-1],1+playerCount,20);
+        return players[playerCount-1];
     }
 }

@@ -21,7 +21,7 @@ public class MultiServerThread extends Thread {
                 new InputStreamReader(
                     socket.getInputStream()));
         ) {
-                String inputLine, outputLine;
+        String inputLine, outputLine;
                 
         // Initiate conversation with client
         ServerProtocol sp = new ServerProtocol();

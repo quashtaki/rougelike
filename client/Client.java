@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Client{
     private String hostName;
     private int portNumber;
-    public Client(String[] args) throws IOException{
+    public Client(String[] args) throws IOException, InterruptedException{
         if(args.length==1){
             hostName = "localhost";
             portNumber = Integer.parseInt(args[0]);
@@ -20,12 +20,12 @@ public class Client{
             portNumber = Integer.parseInt(args[1]);
         } else {throw new IllegalArgumentException("Provide (optional) ip-address and port for server");}
         Window window = new Window();
-        window.run();
+        window.open();
         run(window);
     }
 
 
-    private void run(Window window) throws IOException{
+    private void run(Window window) throws IOException, InterruptedException{
         String fromServer;
         String line;
         String fromUser;
@@ -49,15 +49,11 @@ public class Client{
                 if (fromServer.equals("END")){
                     sb.append("</html>");
                     output = sb.toString();
-                    sb.setLength(6);
+                    sb.setLength(6); // Reset the stringbuilder to <html>
                     System.out.println(output);
                     window.setOutput(output);
-                    long sTime = System.currentTimeMillis();
                     fromUser = "";
-                    while (System.currentTimeMillis() - sTime < 50)
-                    {  
-                        
-                    }
+                    Thread.sleep(50);
                     fromUser = window.getInput();
                     if (fromUser != null) {
                         out.println(fromUser);

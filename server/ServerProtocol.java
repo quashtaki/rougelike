@@ -15,22 +15,26 @@ public class ServerProtocol{
                 if(theInput.equalsIgnoreCase("Bye.")){
                     return "Bye.";
                 }
-                if (theInput.equalsIgnoreCase("W")) {
+                String boardstring = game.getBoard().replace(Character.toString(player.symbol), "<span style=\"color: red\">@</span>");
+                if(!player.alive){
+                    boardstring = boardstring.substring(0,733) + "YOU DIED LOL" + boardstring.substring(745, boardstring.length());
+                }
+                if (theInput.equalsIgnoreCase("UP")) {
                     game.movePlayer(player, player.getX(), player.getY()-1);
-                    theOutput = game.getBoard()+player.getStats()+"END";
-                }else if(theInput.equalsIgnoreCase("A")) {
+                    theOutput = boardstring+player.getStats()+"END";
+                }else if(theInput.equalsIgnoreCase("LEFT")) {
                     game.movePlayer(player, player.getX()-1, player.getY());
-                    theOutput = game.getBoard()+player.getStats()+"END";
-                }else if(theInput.equalsIgnoreCase("S")) {
+                    theOutput = boardstring+player.getStats()+"END";
+                }else if(theInput.equalsIgnoreCase("DOWN")) {
                     game.movePlayer(player, player.getX(), player.getY()+1);
-                    theOutput = game.getBoard()+player.getStats()+"END";
-                }else if(theInput.equalsIgnoreCase("D")) {
+                    theOutput = boardstring+player.getStats()+"END";
+                }else if(theInput.equalsIgnoreCase("RIGHT")) {
                     game.movePlayer(player, player.getX()+1, player.getY());
-                    theOutput = game.getBoard()+player.getStats()+"END";
+                    theOutput = boardstring+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase(" ")) {
-                    theOutput = game.getBoard()+player.getStats()+"END";
+                    theOutput = boardstring+player.getStats()+"END";
                 }else{
-                    theOutput = game.getBoard()+player.getStats()+"END";
+                    theOutput = boardstring+player.getStats()+"END";
                 }
        }
        return theOutput;
