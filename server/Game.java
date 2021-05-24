@@ -61,7 +61,11 @@ public class Game {
     }
 
     public void movePlayer(Player player, int endX, int endY){
-        if (!board[endY][endX].hasPlayer() && (board[endY][endX].getTileType() == Tile.TileType.FLOOR || board[endY][endX].getTileType() == Tile.TileType.DOOR_OPEN)){
+        if (!board[endY][endX].hasPlayer() && (board[endY][endX].getTileType() == Tile.TileType.FLOOR || board[endY][endX].getTileType() == Tile.TileType.DOOR_OPEN || (board[endY][endX].getTileType() == Tile.TileType.DOOR_CLOSED && player.getItem() != null && player.getItem().itemType == Item.ItemType.KEY))){
+            if(board[endY][endX].getTileType() == Tile.TileType.DOOR_CLOSED){
+              player.setItem(null);
+              board[endY][endX].setTileType(Tile.TileType.DOOR_OPEN);
+            }
             board[endY][endX].setPlayer(player);
             board[player.getY()][player.getX()].setPlayer(null);
             player.setX(endX);
@@ -72,6 +76,8 @@ public class Game {
                 player.setItem(board[endY][endX].getItem());
                 board[endY][endX].setItem(null);
             }
+        }else if(board[endY][endX].hasPlayer() && (player.getItem().itemType == Item.ItemType.SWORD)){
+            board[endY][endX].getPlayer().kill();
         }
     }
 
@@ -96,6 +102,10 @@ public class Game {
 
     public Player getPlayer1(){
         return player1;
+    }
+    
+    public Player getPlayer2(){
+        return player2;
     }
 
     public void printBoard(){

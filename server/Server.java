@@ -8,33 +8,30 @@ import java.io.InputStreamReader;
 
 
 public class Server {
-    Player player1, player2;
+    private Player player1, player2;
+    private int players = 0;
+    private int portNumber;
+    private Game game;
     public Server(int portNumber){
-        Game game = new Game();
+        this.portNumber = portNumber;
+        this.game = new Game();
         player1 = game.getPlayer1();
-        try ( 
-            ServerSocket serverSocket = new ServerSocket(portNumber);
-            Socket clientSocket = serverSocket.accept();
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            
-        ) {
-           
-        String inputLine, outputLine;
-                
-        // Initiate conversation with client
-        ServerProtocol sp = new ServerProtocol();
-        outputLine = sp.processInput(null, null, null);
-        out.println(outputLine);
-
-        while ((inputLine = in.readLine()) != null) {
-                outputLine = sp.processInput(game, player1, inputLine);
-                out.println(outputLine);
-                if (outputLine.equals("Bye."))
-                    break;
+        player2 = game.getPlayer2();
+    }
+    public void listen(){
+        try (ServerSocket serverSocket = new ServerSocket(portNumber)) { 
+            while (true) {
+                new MultiServerThread(serverSocket.accept(), game, getNextPlayer()).start();
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Could not listen on port " + portNumber);
+            System.exit(-1);
         }
+    }
+
+    // :)
+    private Player getNextPlayer() {
+        if (players++ == 0) return player1;
+        else return player2;
     }
 }

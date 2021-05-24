@@ -9,25 +9,28 @@ public class ServerProtocol{
     public String processInput(Game game, Player player, String theInput) {
            String theOutput = null;
            if (state == WAITING) {
-                theOutput = "\nEND";
+                theOutput = "END";
                 state = ACTION;
             }else if (state == ACTION) {
+                if(theInput.equalsIgnoreCase("Bye.")){
+                    return "Bye.";
+                }
                 if (theInput.equalsIgnoreCase("W")) {
                     game.movePlayer(player, player.getX(), player.getY()-1);
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase("A")) {
                     game.movePlayer(player, player.getX()-1, player.getY());
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase("S")) {
                     game.movePlayer(player, player.getX(), player.getY()+1);
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase("D")) {
                     game.movePlayer(player, player.getX()+1, player.getY());
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else if(theInput.equalsIgnoreCase(" ")) {
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }else{
-                    theOutput = game.getBoard()+"\nEND";
+                    theOutput = game.getBoard()+player.getStats()+"END";
                 }
        }
        return theOutput;
