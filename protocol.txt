@@ -7,9 +7,11 @@ Kommandon som kan skickas från klienten:
     LEFT - Flyttar ens spelare vänster
     RIGHT - Flyttar ens spelare höger
     Bye. - Disconnectar ens klient (man kan ej reconnecta).
+    (vad annars som helst) - leder inte till någon förändring i spelet utan servern svarar med nedanstående:
 
 Data som skickas från servern till klienten:
-    All "grafik" dvs hela spelet som en UTF8 sträng (med flera rader).
+    All "grafik" dvs hela spelet som en UTF8 sträng (med flera rader). Denna data skickas som svar på vad som helst som skickas till servern från klienten, 
+    vare sig det vore ett kommando eller en tom sträng.
 
 Serverprotokollet har två states:
     WAITING: Etablerar kontakt med klienten och skickar en sträng av characters
