@@ -1,0 +1,21 @@
+Protokol:
+Datatyp som sänds över: Stream av strängar encodade med UTF-8
+
+Kommandon som kan skickas från klienten:
+    UP - Flyttar ens spelare uppåt
+    DOWN - Flyttar ens spelare nedåt
+    LEFT - Flyttar ens spelare vänster
+    RIGHT - Flyttar ens spelare höger
+    Bye. - Disconnectar ens klient (man kan ej reconnecta).
+
+Data som skickas från servern till klienten:
+    All "grafik" dvs hela spelet som en UTF8 sträng (med flera rader).
+
+Serverprotokollet har två states:
+    WAITING: Etablerar kontakt med klienten och skickar en sträng av characters
+    som representerar spelplanen.
+    Övergår till state ACTION.
+
+    ACTION: Tar emot kommando från klienten, utför motsvarande action på spelobjektet,
+    och skickar den uppdaterade strängen som representerar spelplanen.
+    Förblir i samma state, ACTION.

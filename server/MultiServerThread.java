@@ -13,7 +13,7 @@ public class MultiServerThread extends Thread {
         this.player = player;
     }
     
-    public void run() {
+    public void run(){
 
         try (
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -27,15 +27,18 @@ public class MultiServerThread extends Thread {
         ServerProtocol sp = new ServerProtocol();
         outputLine = sp.processInput(null, null, null);
         out.println(game.getBoard()+"\nEND");
-
+        
         while ((inputLine = in.readLine()) != null) {
                 outputLine = sp.processInput(game, player, inputLine);
                 out.println(outputLine);
-                if (outputLine.equals("Bye."))
+                if (outputLine.equals("Bye.")){
+                    socket.close();
                     break;
+                }
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("Player " + player.symbol + " disconnected");
     }
 }

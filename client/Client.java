@@ -1,5 +1,6 @@
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
@@ -28,7 +29,7 @@ public class Client{
     private void run(Window window) throws IOException, InterruptedException{
         String fromServer;
         String line;
-        String fromUser;
+        String fromUser = " ";
         String output;
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         Scanner sc = new Scanner(System.in);
@@ -50,18 +51,16 @@ public class Client{
                     sb.append("</html>");
                     output = sb.toString();
                     sb.setLength(6); // Reset the stringbuilder to <html>
-                    System.out.println(output);
+                    //System.out.println(output);
                     window.setOutput(output);
-                    fromUser = "";
                     Thread.sleep(50);
                     fromUser = window.getInput();
-                    if (fromUser != null) {
-                        out.println(fromUser);
-                    }else{
-                        out.println("");
-                    }
+                    byte[] fromUserBytes = fromUser.getBytes();
+                    String encodedFromUser = new String(fromUserBytes, StandardCharsets.UTF_8);
+                    out.println(encodedFromUser);
                 }
             }
         }
+        window.close();
     }
 }

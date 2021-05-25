@@ -1,4 +1,5 @@
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.io.*;
 
 public class ServerProtocol{
@@ -13,9 +14,12 @@ public class ServerProtocol{
                 state = ACTION;
             }else if (state == ACTION) {
                 if(theInput.equalsIgnoreCase("Bye.")){
-                    return "Bye.";
+                    theOutput = "Bye.";
+                    byte[] outputBytes = theOutput.getBytes();
+                    String encodedOutput = new String(outputBytes, StandardCharsets.UTF_8);
+                    return encodedOutput;
                 }
-                String boardstring = game.getBoard().replace(Character.toString(player.symbol), "<span style=\"color: red\">@</span>");
+                String boardstring = game.getBoard().replace(Character.toString(player.symbol), "@");
                 if(!player.alive){
                     boardstring = boardstring.substring(0,733) + "YOU DIED LOL" + boardstring.substring(745, boardstring.length());
                 }
@@ -31,12 +35,12 @@ public class ServerProtocol{
                 }else if(theInput.equalsIgnoreCase("RIGHT")) {
                     game.movePlayer(player, player.getX()+1, player.getY());
                     theOutput = boardstring+player.getStats()+"END";
-                }else if(theInput.equalsIgnoreCase(" ")) {
-                    theOutput = boardstring+player.getStats()+"END";
                 }else{
                     theOutput = boardstring+player.getStats()+"END";
                 }
        }
-       return theOutput;
+       byte[] outputBytes = theOutput.getBytes();
+       String encodedOutput = new String(outputBytes, StandardCharsets.UTF_8);
+       return encodedOutput;
     }
 }

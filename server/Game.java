@@ -68,6 +68,7 @@ public class Game {
             if(board[endY][endX].getTileType() == Tile.TileType.DOOR_CLOSED){
               player.setItem(null); // open the door by using (and consuming) the key
               board[endY][endX].setTileType(Tile.TileType.DOOR_OPEN);
+              System.out.println("Player " + player.symbol + " opened door at " + endX + ":" + endY);
             }
             board[endY][endX].setPlayer(player);
             board[player.getY()][player.getX()].setPlayer(null);
@@ -77,7 +78,7 @@ public class Game {
             if(player.getItem()==null && board[endY][endX].getItem()!=null){
                 player.setItem(board[endY][endX].getItem());
                 board[endY][endX].setItem(null);
-                System.out.println("Player " + player.symbol + " picked up " + player.getItem());
+                System.out.println("Player " + player.symbol + " picked up " + player.getItem().itemType.toString());
             }
         }else if(board[endY][endX].hasPlayer() && player.getItem() != null && (player.getItem().itemType == Item.ItemType.SWORD)){
             board[endY][endX].getPlayer().kill();

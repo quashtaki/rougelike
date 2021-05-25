@@ -6,7 +6,7 @@ import java.awt.Font;
 
 
 public class Window extends JFrame{  
-    private String input;
+    private String input = "saidjfgs";
     JLabel maingame;
     public void open() {  
         InputListener iListener = new InputListener();        
@@ -23,9 +23,13 @@ public class Window extends JFrame{
         this.setVisible(true);//making the frame visible
     }
 
+    public void close(){
+        System.exit(0);
+    }
+
     public String getInput(){
         String currentInput = input;
-        input = "";
+        input = "saidjfgs";
         return currentInput;
     }
 
@@ -59,6 +63,9 @@ public class Window extends JFrame{
                 case KeyEvent.VK_D:
                 case KeyEvent.VK_RIGHT:
                     input = "RIGHT";
+                    break;
+                case KeyEvent.VK_Q:
+                    input = "Bye.";
             }
         }
 
