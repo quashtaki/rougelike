@@ -1,2 +1,2 @@
 # rougelike
-progp project :)
+school (progp) project :)
